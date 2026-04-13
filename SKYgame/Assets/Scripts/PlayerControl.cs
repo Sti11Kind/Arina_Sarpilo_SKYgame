@@ -15,12 +15,12 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate()
     {
-       rb.AddForce(transform.forward*speed*Time.fixedDeltaTime);
        Vector2 moveInput = move.ReadValue<Vector2>();
        Debug.Log(" x: "+moveInput.x + " y: " + moveInput.y);
        transform.Rotate(0, -moveInput.x  * rotSpeed * Time.fixedDeltaTime, 0);
        float turnAngle = Mathf.Abs(180- transform.localEulerAngles.y);
        float speedMult = Mathf.Cos(turnAngle*Mathf.Deg2Rad);
+       rb.AddForce(transform.forward * speed * speedMult *Time.fixedDeltaTime);
        Debug.Log("turn Angle: " + turnAngle);
     }
 }
