@@ -10,36 +10,33 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject raceOverPanel;
     [SerializeField] private int nextLevelIndex = 1;
     [SerializeField] private TMP_Text leaderboardText;
-
-    //delete below 4 --------------------------------------------
+    
     [SerializeField] private TMP_Text penaltyText; 
     [SerializeField] private float penaltyMoveDistance = 60;
     [SerializeField] private float penaltyAnimTime = 0.8f;
     private Vector3 penaltyTextStartPos;
-    //-----------------------------------------------------------
+    
    
     void Start()
     {
         screenOverlay.gameObject.SetActive(true);
         raceOverPanel.SetActive(false);
         StartCoroutine(FadeOutOverlay());
-
-        //delete this two -------------------------
+        
         penaltyTextStartPos = penaltyText.rectTransform.localPosition;
         penaltyText.gameObject.SetActive(false);
-        // yupp -----------------------------------
     }
 
     private void OnEnable()
     {
         FinishGate.FinishRace += OnRaceFinished;
-        GameManager.PenaltyAdded += ShowPenaltyText; //delete
+        GameManager.PenaltyAdded += ShowPenaltyText; 
     }
 
     private void OnDisable()
     {
         FinishGate.FinishRace -= OnRaceFinished;
-        GameManager.PenaltyAdded -= ShowPenaltyText; //delete
+        GameManager.PenaltyAdded -= ShowPenaltyText; 
     }
 
     private void OnRaceFinished()
@@ -69,8 +66,7 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
     }
-
-    //delete BELOW ---------------------------------------
+    
     private void ShowPenaltyText(int penalty)
     {
         StopCoroutine("PenaltyTextCoroutine");
@@ -108,7 +104,6 @@ public class UIManager : MonoBehaviour
         penaltyText.gameObject.SetActive(false);
         rect.localPosition = penaltyTextStartPos;
     }
-    // above -------------------------------------------------------------------
 
     public void Restart()
     {

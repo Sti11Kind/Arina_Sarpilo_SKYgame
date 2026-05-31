@@ -14,16 +14,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text raceTimeText, bestTimeText;
     [SerializeField] private string bestTimeKey = "LVLBestTime";
 
-    [SerializeField] private int flagPenaltyTime = 1; //delete
-    [SerializeField] private int hitPenaltyTime = 3; //delete
+    [SerializeField] private int flagPenaltyTime = 1; 
+    [SerializeField] private int hitPenaltyTime = 3; 
 
-    public static event Action<int> PenaltyAdded; //delete
+    public static event Action<int> PenaltyAdded; 
 
     private void OnEnable()
     {
         StarpGate.StartRace += OnRaceStart;
         FinishGate.FinishRace += OnRaceFinish;
-        SlalomFlag.RacePenalty += AddFlagPenalty; //change to 
+        SlalomFlag.RacePenalty += AddFlagPenalty; 
         Obstacles.OnPlayerHit += AddHitPenalty;
     }
 
@@ -31,8 +31,8 @@ public class GameManager : MonoBehaviour
     {
         StarpGate.StartRace -= OnRaceStart;
         FinishGate.FinishRace -= OnRaceFinish;
-        SlalomFlag.RacePenalty -= AddFlagPenalty;  //change to SlalomFlag.RacePenalty += AddRacePenalty;
-        Obstacles.OnPlayerHit -= AddHitPenalty; //delete
+        SlalomFlag.RacePenalty -= AddFlagPenalty;  
+        Obstacles.OnPlayerHit -= AddHitPenalty; 
     }
 
     private void Start()
@@ -50,18 +50,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    /* void AddRacePenalty()
-     {
-         penaltyTime += new TimeSpan(0, 0, penaltyTimeVal);
-     }*/ //onnnn
+    
 
-    void AddFlagPenalty() //delete
+    void AddFlagPenalty() 
     {
         penaltyTime += new TimeSpan(0, 0, flagPenaltyTime);
         PenaltyAdded?.Invoke(flagPenaltyTime);
     }
 
-    void AddHitPenalty() //delete
+    void AddHitPenalty() 
     {
         penaltyTime += new TimeSpan(0, 0, hitPenaltyTime);
         PenaltyAdded?.Invoke(hitPenaltyTime);
